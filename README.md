@@ -1,102 +1,56 @@
-# SHPE UF SWE Team Training Backend Template
+# SHPEterview  
+### The mock interview platform for SHPE members.  
 
-![alt text](https://shpeuf.s3.amazonaws.com/public/misc/logo_horizontal.png "SHPE logo")
+## 🎯 Summary  
 
-Congrats one more time on being selected as prospective software developer directors! (Sweenies) In this repository, you will find a template that you would want to use to build the backend functionality of your training project. 
+SHPEterview is a **web-based platform** where SHPEitos can **schedule mock interviews, practice technical & behavioral questions, and receive structured feedback.** 
+Built with the MERNG stack **(MongoDB, Express, React, Node.js, GraphQL)**, this platform makes real-world interview experiences to help members gain confidence and improve their skills. 
 
-## Why This Template?
+---
 
-This template should function as a building foundation for the backend of your project. In it, you will find how your web app should be structured, although it is not completely necessary, I truly recommend following this structure as it very closely mimics the way our own server is structured (plus it makes your JPM work easier) and will yield you better results once you are integraded into the team.
-
-Every file has it's own section in the readME(See navigation below) explaining its purpose and role in the proper function of your website. Each file in the repository also includes several commented out examples and explanations that you can follow to adjust it to your preferences and choice of theme/topic/info used.
-
-## Getting Started
-
-Before starting out, we must first take care of a couple of things. 
-
-If you haven't already, make sure you install the latest version of node.js, link: https://nodejs.org/en
+## 👥 Target User  
+My project is intended for members in SHPE, for job and internship seekers, and for professionals in industry
 
 
-create our database! For this project, we will be using mongodb to store information from and to our server, as it is what we currently use to store all of SHPE UF's info from our website!
+### **User Needs:**  
+- Need structured **mock interview practice**  
+- Want to **receive feedback** on interview performance  
+- Makes a **homemade or community** way to improve!
 
-I have created a short tutorial video to show how to set up mongoDB for this project: 
 
-Another important step if you have not done so already, open a terminal command and run "npm install" in the foulder where the package.json and package-lock.json are located. This will install all the dependencies you may need (note: if you decide to implement something extra, you will have to npm install said dependencies) But for now this should be enough to get the backend runnning! 
+---
 
-## Navigation
+## 💡 Purpose & Problem Statement  
+**The Problem:**  
+Many SHPE members struggle to get **quality mock interviews** before applying for jobs or internships. Scheduling practice interviews is difficult, and feedback is often **limited or informal**.  
 
-### index.js ###
+**The Solution:**  
+The solution for this is a hub where SHPE members can schedule practice interviews with peers and mentors. 
+They can choose either behavioral or technical interviews, get structured feedback on strengths and weaknesses, access the past interview responses, and be able to track their progress.
 
-The index.js file is the entry point of your backend application. It brings together all the key components of your GraphQL server, connects to your MongoDB database, and starts the server.
 
-**Purpose:**
 
-* Set Up the Apollo Server: This file configures and initializes the Apollo Server, which handles GraphQL queries, mutations, and subscriptions.
+**Superpower:** "The power to shapeshift you into a professional"
 
-* Connect to MongoDB: It establishes a connection to the MongoDB database using Mongoose.
+---
 
-* Start the Server: Once the database is successfully connected, the server starts and listens for incoming requests on the specified port.
+## 🔥 Core Features  
+**User Authentication** – A sign up or login system.  
+**Schedule a Mock Interview** – Being able to pick a date and time with a specific topic
+**Live Interview Session** – Where it gives a timed Q&A  
+**Feedback & Ranking or Rating System** – Interviewers can give structured feedback  
+**Past Responses & just Statistics** – For users to see how much they improve and be able to see past interviews.
 
-**ApolloServer documentation:** https://www.apollographql.com/docs/apollo-server/api/apollo-server
+---
 
-**Mongoose docs:** https://mongoosejs.com/docs/connections.html
+## 🛠️ Technical Overview  
+**Frontend:** React.js (UI components, scheduling system)  
+**Backend:** Node.js & Express (API handling)  
+**Database:** MongoDB (Storing users, interviews, feedback)  
+**GraphQL API:** Gets the data for real-time updates  
 
-### config.js ###
-This file is used to connect to the mongodb. not much to see here. watch video!
-
-### models folder
-
-#### TypeName.js
-
-The files in the model folder look extremely similar to the definitions already established on TypeDefs.js, so this part is pretty straightforward.
-
-This defines the database schema using Mongoose (for MongoDB).
-It specifies how data is stored and managed in MongoDB.
-
-Example: 
-
-```
-const { model, Schema } = require('mongoose');
-
-const artistSchema = new Schema({
-    name: String,
-    genre: String
-});
-
-module.exports = model('Artist', artistSchema);
-```
-
-### graphql folder
-
-#### -TypeDefs.js
-
-The TypeDefs.js file defines the GraphQL schema for your backend. This file is where you specify the structure of the data that can be queried or mutated through your API.
-
-The most basic components of a GraphQL schema are Object types,  which just represent a kind of object you can fetch from your service, and what fields it has. In SDL, we represent it like this:
-
-```
-type User {
-  id: ID!
-  name: String
-}
-
-type Query {
-  user(id: ID!): User
-}
-```
-
-### resolvers 
-
-If you want a more comprehensive tutorial or you like learning by doing before starting, check out this tutorial! https://www.apollographql.com/tutorials/lift-off-part2?referrer=docs-content
-
-In this template only one resolver (and type) is used. If you are using more than one type, for example, posts, users & comments, you will have to add the correspondent files manually.
-
-#### -index.js
-
-This index.js file inside the resolvers serves to export each individual resolver file.
-
-#### -typename.js
-
-"typename" is a placeholder for the name of your type. It is good practice to name this file the same as what is on your TypeDefs & Schema. 
-
-This is one of the most important files as here is where you will be adding functionality/definitions to your queries and mutations.
+### **How It Works:**  
+1️ User logs in & schedules an interview  
+2️ Another user (interviewer) accepts the request  
+3️ Live interview happens (structured Q&A)  
+4️ Feedback is submitted & stored for review  
