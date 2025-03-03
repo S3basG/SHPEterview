@@ -1,12 +1,11 @@
 //Need to npm install apollo-server
 
-/*
-const { ApolloServer }= require(' insert location-of-apollo-server file '); 
+const { ApolloServer }= require('apollo-server'); //We connected to ApolloServer
 const { MONGODB } = require('./config.js') //We connected to MongoDB with the config file
-const mongoose = require('mongoose'); mongoose is a JavaScript library that connects MongoDB to Node.js
-const typeDefs = require('./graphql/TypeDefs');
-const resolvers = require('./graphql/resolvers');
-*/
+const mongoose = require('mongoose'); //We connected to mongoose
+const typeDefs = require('./graphql/TypeDefs');  //We connected to the typeDefs file
+const resolvers = require('./graphql/resolvers'); //We connected to the resolvers file
+
 
 
 
@@ -18,19 +17,13 @@ from documentation:
 */
 
 
-/*
-EXAMPLE 
+
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: ({req}) => ({ req })
 });
-
-*/
-
-
-/*
 
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
@@ -42,4 +35,3 @@ mongoose
     console.log(`Server running at ${res.url}`);
   });
 
-*/

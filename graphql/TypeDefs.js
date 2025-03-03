@@ -36,13 +36,29 @@ Ex:
 */
 
 const TypeDefs = gql`
+    type User {
+        id: ID!
+        name: String!
+        email: String!
+        password: String!
+    }
 
-    #write your code here
-
-
-
-
-
+    type Interview {
+        id: ID!
+        candidate: String!
+        interviewer: String!
+        questions:[String]!
+        status: String!
+    }
+    type Query {
+        getUsers: [User]
+        getInterviews: [Interview]
+    }
+    type Mutation {
+        register(name: String!, email: String!, password: String!): User
+        login(email: String!, password: String!): String
+        createInterview(candidateId: ID!, interviewerId: ID, questions: [String]!): Interview
+    }
 `;
 
 module.exports = TypeDefs;
