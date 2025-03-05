@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../config'); // Ensure SECRET_KEY is exported from your config
+const { SECRET_KEY } = require('../../config'); // Ensure SECRET_KEY is exported from your config
 
 
 module.exports = (context) => {
