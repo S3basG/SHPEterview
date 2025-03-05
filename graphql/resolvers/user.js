@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../../config');
-
+const auth = require('../Middleware/auth');
 
 /*finds all of the user docs in the User collection
 returns an array of user objects
@@ -16,12 +16,9 @@ if there are any other errors, it throws an error
 */
 module.exports = {
   Query: {
-    getUsers: async () => {
-      try {
+    getUsers: async (_, __, context) => {
+        auth(context); // This will throw an error if not authenticated.
         return await User.find();
-      } catch (err) {
-        throw new Error(err);
-      }
     },
   },
   Mutation: {
