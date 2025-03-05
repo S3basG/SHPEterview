@@ -7,7 +7,9 @@ module.exports = {
   Query: {
     getInterviews: async () => {
       try {
-        return await Interview.find();
+        return await Interview.find()
+        .populate('candidate')
+        .populate('interviewer');
       } catch (err) {
         throw new Error(err);
       }
