@@ -1,6 +1,9 @@
 const Interview = require('../../models/Interview');
 
 module.exports = {
+ 
+ //finds all of the interview docs in the Interview collection
+ //returns an array of interview objects
   Query: {
     getInterviews: async () => {
       try {

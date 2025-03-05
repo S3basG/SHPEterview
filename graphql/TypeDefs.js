@@ -45,8 +45,8 @@ const TypeDefs = gql`
 
     type Interview {
         id: ID!
-        candidate: String!
-        interviewer: String!
+        candidate: User!
+        interviewer: User
         questions:[String]!
         status: String!
     }

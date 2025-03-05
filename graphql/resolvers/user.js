@@ -3,6 +3,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../../config');
 
+
+/*finds all of the user docs in the User collection
+returns an array of user objects
+register and login are mutations that allow users to register and login
+register hashes the password before saving it to the database
+login checks if the user exists and if the password is correct
+if the user exists and the password is correct, it returns a jwt token
+if the user does not exist, it throws an error
+if the password is incorrect, it throws an error
+if there are any other errors, it throws an error
+*/
 module.exports = {
   Query: {
     getUsers: async () => {
