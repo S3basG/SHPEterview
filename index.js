@@ -7,16 +7,12 @@ const typeDefs = require('./graphql/TypeDefs');  //We connected to the typeDefs 
 const resolvers = require('./graphql/resolvers'); //We connected to the resolvers file
 
 
-
-
 /* Below is a ApolloServer constructor:
 
 from documentation: 
 - Returns an initialized ApolloServer instance.
 - Takes an options object as a parameter.
 */
-
-
 
 
 const server = new ApolloServer({
@@ -34,4 +30,3 @@ mongoose
   .then((res) => {
     console.log(`Server running at ${res.url}`);
   });
-
