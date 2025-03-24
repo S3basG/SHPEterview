@@ -1,7 +1,6 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; // Import Link
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Image } from 'semantic-ui-react';
 import HomePage from './HomePage'; // <-- import the new file
 import Login from './Login';
 import Register from './Register';
@@ -18,7 +17,14 @@ function App() {
         <Container>
           {/* Make the header clickable and navigate to the home page */}
           <Menu.Item header as={Link} to="/">
-            SHPE Interview App
+          <Image
+            src = "./SHPELogo.png"
+            alt = "SHPE Logo"
+            size = "mini"
+            style = {{ marginRight: '0.5em' }}
+          />
+          SHPEterview
+
           </Menu.Item>
           <Menu.Item as={Link} to="/test">Test Query</Menu.Item>
           <Menu.Item as={Link} to="/login">Login</Menu.Item>

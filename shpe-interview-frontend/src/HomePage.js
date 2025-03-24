@@ -1,7 +1,7 @@
 // HomePage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Segment, Button, Icon } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Icon , Image } from 'semantic-ui-react';
 
 function HomePage() {
   return (
@@ -29,7 +29,7 @@ function HomePage() {
               marginTop: '1em',
             }}
           >
-            Welcome to the SHPE Interview App!
+            Welcome to the SHPEterview App!
           </Header>
           <Header
             as="h2"
@@ -42,6 +42,14 @@ function HomePage() {
           >
             Practice your interviewing skills and land your dream job!
           </Header>
+
+          <Image
+            src = "./SHPELogo.png"
+            size="small"
+            centered
+            style={{ marginTop: '2em' }}
+          />
+
           <Button primary size="huge" as={Link} to="/register" style={{ marginTop: '1.5em' }}>
             Get Started
             <Icon name="right arrow" />
