@@ -1,5 +1,7 @@
+// InterviewList.js
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { Container, Header, Card, Loader, Message } from 'semantic-ui-react';
 
 const GET_INTERVIEWS = gql`
   query {
@@ -22,25 +24,40 @@ const GET_INTERVIEWS = gql`
 export default function InterviewList() {
   const { loading, error, data } = useQuery(GET_INTERVIEWS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <Loader active inline="centered" content="Loading interviews..." />;
+  if (error) return <Message error header="Error" content={error.message} />;
 
   if (data.getInterviews.length === 0) {
-    return <p>No interviews found.</p>;
+    return (
+      <Container style={{ marginTop: '2em' }}>
+        <Header as="h2">Interviews</Header>
+        <Message info header="No Interviews Found" content="Try creating one!" />
+      </Container>
+    );
   }
 
   return (
-    <div>
-      <h2>Interviews</h2>
-      {data.getInterviews.map(interview => (
-        <div key={interview.id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
-          <p><strong>ID:</strong> {interview.id}</p>
-          <p><strong>Candidate:</strong> {interview.candidate?.name} ({interview.candidate?.email})</p>
-          <p><strong>Interviewer:</strong> {interview.interviewer?.name} ({interview.interviewer?.email})</p>
-          <p><strong>Questions:</strong> {interview.questions.join(', ')}</p>
-          <p><strong>Status:</strong> {interview.status}</p>
-        </div>
-      ))}
-    </div>
+    <Container style={{ marginTop: '2em' }}>
+      <Header as="h2">Interviews</Header>
+      <Card.Group>
+        {data.getInterviews.map((interview) => (
+          <Card key={interview.id}>
+            <Card.Content>
+              <Card.Header>Interview ID: {interview.id}</Card.Header>
+              <Card.Meta>
+                Candidate: {interview.candidate?.name} ({interview.candidate?.email})
+              </Card.Meta>
+              <Card.Meta>
+                Interviewer: {interview.interviewer?.name} ({interview.interviewer?.email})
+              </Card.Meta>
+              <Card.Description>
+                <strong>Questions:</strong> {interview.questions.join(', ')} <br />
+                <strong>Status:</strong> {interview.status}
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        ))}
+      </Card.Group>
+    </Container>
   );
 }

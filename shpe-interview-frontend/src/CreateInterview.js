@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
+import { Container, Form, Button, Message } from 'semantic-ui-react';
 
 const CREATE_INTERVIEW = gql`
   mutation CreateInterview($candidateId: ID!, $interviewerId: ID, $questions: [String]!) {
@@ -40,41 +42,34 @@ export default function CreateInterview() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Create Interview</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Candidate ID:</label><br />
-          <input
-            type="text"
-            value={candidateId}
-            onChange={(e) => setCandidateId(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Interviewer ID (optional):</label><br />
-          <input
-            type="text"
-            value={interviewerId}
-            onChange={(e) => setInterviewerId(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Questions (comma separated):</label><br />
-          <input
-            type="text"
-            value={questionList}
-            onChange={(e) => setQuestionList(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating...' : 'Create Interview'}
-        </button>
-      </form>
-      {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-    </div>
+    <Container style={{ marginTop: '2em' }}>
+      <Form onSubmit={handleSubmit} loading={loading}>
+        <Form.Input
+          label="Candidate ID"
+          placeholder="Enter Candidate ID"
+          value={candidateId}
+          onChange={(e) => setCandidateId(e.target.value)}
+          required
+        />
+        <Form.Input
+          label="Interviewer ID (optional)"
+          placeholder="Enter Interviewer ID"
+          value={interviewerId}
+          onChange={(e) => setInterviewerId(e.target.value)}
+        />
+        <Form.Input
+          label="Questions"
+          placeholder="Enter questions, separated by commas"
+          value={questionList}
+          onChange={(e) => setQuestionList(e.target.value)}
+          required
+        />
+        <Button primary type="submit">
+          {loading ? 'Creating Interview...' : 'Create Interview'}
+        </Button>
+      </Form>
+      {successMsg && <Message positive>{successMsg}</Message>}
+      {errorMsg && <Message negative>Error: {errorMsg}</Message>}
+    </Container>
   );
 }

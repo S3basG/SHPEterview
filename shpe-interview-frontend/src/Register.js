@@ -1,6 +1,10 @@
+// Register.js
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+
+// Import Semantic UI components
+import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
 
 const REGISTER_MUTATION = gql`
   mutation Register($name: String!, $email: String!, $password: String!) {
@@ -21,9 +25,8 @@ export default function Register() {
 
   const [registerUser, { loading }] = useMutation(REGISTER_MUTATION, {
     onCompleted: (data) => {
-      // After successful registration, you might redirect to login
       alert(`User ${data.register.name} registered successfully!`);
-      navigate('/login'); // or wherever you want to go next
+      navigate('/login');
     },
     onError: (error) => {
       setErrorMsg(error.message);
@@ -36,41 +39,51 @@ export default function Register() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label><br />
+    <Container style={{ marginTop: '2em' }}>
+      <Header as="h2">Register</Header>
+      <Form onSubmit={handleSubmit} error={!!errorMsg}>
+        <Form.Field>
+          <label>Name</label>
           <input
-            type="text"
+            placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label>Email:</label><br />
+        </Form.Field>
+        <Form.Field>
+          <label>Email</label>
           <input
             type="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label>Password:</label><br />
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
           <input
             type="password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <button type="submit" disabled={loading}>
+        </Form.Field>
+        <Button type="submit" loading={loading} primary>
           {loading ? 'Registering...' : 'Register'}
-        </button>
-      </form>
-      {errorMsg && <p style={{ color: 'red' }}>Error: {errorMsg}</p>}
-    </div>
+        </Button>
+      </Form>
+
+      {errorMsg && (
+        <Message
+          error
+          header="Registration Error"
+          content={errorMsg}
+          style={{ marginTop: '1em' }}
+        />
+      )}
+    </Container>
   );
 }

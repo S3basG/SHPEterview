@@ -1,51 +1,60 @@
+// App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import TestQuery from './TestQuery';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; // Import Link
+import { Container, Menu } from 'semantic-ui-react';
+import HomePage from './HomePage'; // <-- import the new file
 import Login from './Login';
 import Register from './Register';
 import InterviewList from './InterviewList';
 import CreateInterview from './CreateInterview';
 import LogoutButton from './Logout';
-
-
-// Example page components
-function HomePage() {
-  return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the SHPE Interview App!</p>
-      <Link to="/test">Go to Test Query</Link>|
-      <Link to="/login"> Go to Login</Link>|
-      <Link to="/register"> Need an account? Register here.</Link>|
-      <Link to="/interviews"> View Interviews</Link>|
-      <LogoutButton />
-    </div>
-  );
-}
-
-function TestPage() {
-  return (
-    <div>
-      <h1>Test Query Page</h1>
-      { <TestQuery /> }
-      <p>This page will eventually show data from the backend.</p>
-      <Link to="/">Back to Home</Link>
-    </div>
-  );
-}
+import TestQuery from './TestQuery';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/test" element={<TestPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/interviews" element={<InterviewList />} />
-        <Route path="/create-interview" element={<CreateInterview />} />
-      </Routes>
+      {/* Navigation Menu */}
+      <Menu fixed="top" inverted>
+        <Container>
+          {/* Make the header clickable and navigate to the home page */}
+          <Menu.Item header as={Link} to="/">
+            SHPE Interview App
+          </Menu.Item>
+          <Menu.Item as={Link} to="/test">Test Query</Menu.Item>
+          <Menu.Item as={Link} to="/login">Login</Menu.Item>
+          <Menu.Item as={Link} to="/register">Register</Menu.Item>
+          <Menu.Item as={Link} to="/interviews">Interviews</Menu.Item>
+          <Menu.Item as={Link} to="/create-interview">Create Interview</Menu.Item>
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <LogoutButton />
+            </Menu.Item>
+          </Menu.Menu>
+        </Container>
+      </Menu>
+
+      {/* Main Content */}
+      <Container style={{ marginTop: '7em' }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/test" element={<TestQueryPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/interviews" element={<InterviewList />} />
+          <Route path="/create-interview" element={<CreateInterview />} />
+        </Routes>
+      </Container>
     </Router>
+  );
+}
+
+// If you want to keep your "TestPage" in a separate function:
+function TestQueryPage() {
+  return (
+    <div>
+      <h1>Test Query Page</h1>
+      <TestQuery />
+    </div>
   );
 }
 
