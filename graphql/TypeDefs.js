@@ -46,14 +46,16 @@ const TypeDefs = gql`
     type Interview {
         id: ID!
         candidate: User!
-        interviewer: User
-        questions:[String]!
+        interviewer: User!
+        questions: [String]!
         status: String!
     }
+
     type Query {
         getUsers: [User]
-        getInterviews: [Interview]
+        getInterviews: [Interview] # Add this query
     }
+
     type Mutation {
         register(name: String!, email: String!, password: String!): User
         login(email: String!, password: String!): String
@@ -62,4 +64,3 @@ const TypeDefs = gql`
 `;
 
 module.exports = TypeDefs;
-

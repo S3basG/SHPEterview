@@ -1,18 +1,20 @@
-/* 
-This means when a GraphQL query like getUsers is made, 
-it calls the function defined in user.js. 
-
-Similarly, createInterview comes from interview.js.
-
-*/
 const userResolvers = require('./user');
 const interviewResolvers = require('./interview');
 
+// Merge Query resolvers and remove any unexpected keys:
+const mergedQueryResolvers = {
+  ...userResolvers.Query,
+  ...interviewResolvers.Query,
+};
+
 module.exports = {
-  Query: {
-    ...userResolvers.Query,
-    ...interviewResolvers.Query,
+  User: {
+    id: (parent) => parent._id.toString(),
   },
+  Interview: {
+    id: (parent) => parent._id.toString(),
+  },
+  Query: mergedQueryResolvers,
   Mutation: {
     ...userResolvers.Mutation,
     ...interviewResolvers.Mutation,
