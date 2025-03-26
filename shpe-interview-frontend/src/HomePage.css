@@ -1,0 +1,34 @@
+/* HomePage.css */
+
+/* Positions the wave at the bottom of the hero */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8vw; /* Adjust for wave height */
+    overflow: hidden;
+    line-height: 0;
+  }
+  
+  /* (Optional) You can add minimal fade-in or other simple effects here if you like */
+  .hero-content {
+    z-index: 1;
+    /* Example fade-in (comment out if you want no animation):
+    animation: fadeIn 0.8s ease-in-out;
+    */
+  }
+  
+  /* Example fade-in keyframes (comment out if unused)
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  */
+  

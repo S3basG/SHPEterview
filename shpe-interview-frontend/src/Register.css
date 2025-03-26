@@ -1,0 +1,27 @@
+/* Register.css */
+
+/* Dark overlay for the hero section */
+.register-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+  }
+  
+  /* Container for the hero content */
+  .register-hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Wave transition at the bottom of the hero */
+  .wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8vw; /* Adjust height as needed */
+    overflow: hidden;
+    line-height: 0;
+  }
+  

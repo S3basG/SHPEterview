@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import { Container, Form, Button, Message } from 'semantic-ui-react';
+import { Container, Form, Button, Message, Segment, Header } from 'semantic-ui-react';
+
 
 const CREATE_INTERVIEW = gql`
   mutation CreateInterview($candidateId: ID!, $interviewerId: ID, $questions: [String]!) {
@@ -42,34 +42,68 @@ export default function CreateInterview() {
   };
 
   return (
-    <Container style={{ marginTop: '2em' }}>
-      <Form onSubmit={handleSubmit} loading={loading}>
-        <Form.Input
-          label="Candidate ID"
-          placeholder="Enter Candidate ID"
-          value={candidateId}
-          onChange={(e) => setCandidateId(e.target.value)}
-          required
-        />
-        <Form.Input
-          label="Interviewer ID (optional)"
-          placeholder="Enter Interviewer ID"
-          value={interviewerId}
-          onChange={(e) => setInterviewerId(e.target.value)}
-        />
-        <Form.Input
-          label="Questions"
-          placeholder="Enter questions, separated by commas"
-          value={questionList}
-          onChange={(e) => setQuestionList(e.target.value)}
-          required
-        />
-        <Button primary type="submit">
-          {loading ? 'Creating Interview...' : 'Create Interview'}
-        </Button>
-      </Form>
-      {successMsg && <Message positive>{successMsg}</Message>}
-      {errorMsg && <Message negative>Error: {errorMsg}</Message>}
-    </Container>
+    <>
+      {/* Hero Section */}
+      <Segment
+        inverted
+        textAlign="center"
+        style={{
+          minHeight: '40vh',
+          padding: '4em 0em',
+          background:
+            'url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center center/cover no-repeat',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        vertical
+      >
+        {/* Dark overlay */}
+        <div className="create-interview-overlay" />
+
+        <Container text>
+          <Header as="h1" inverted style={{ fontSize: '3em', fontWeight: 'bold' }}>
+            Create Interview
+          </Header>
+          <Header as="h2" inverted style={{ fontSize: '1.5em', fontWeight: 'normal', marginTop: '0.5em' }}>
+            Schedule your next interview today!
+          </Header>
+        </Container>
+      </Segment>
+
+      {/* Form Section */}
+      <Segment style={{ padding: '4em 0em' }} vertical>
+        <Container style={{ maxWidth: '600px' }}>
+          <Form onSubmit={handleSubmit} loading={loading} error={!!errorMsg}>
+            <Form.Input
+              label="Candidate ID"
+              placeholder="Enter Candidate ID"
+              value={candidateId}
+              onChange={(e) => setCandidateId(e.target.value)}
+              required
+            />
+            <Form.Input
+              label="Interviewer ID (optional)"
+              placeholder="Enter Interviewer ID"
+              value={interviewerId}
+              onChange={(e) => setInterviewerId(e.target.value)}
+            />
+            <Form.Input
+              label="Questions"
+              placeholder="Enter questions, separated by commas"
+              value={questionList}
+              onChange={(e) => setQuestionList(e.target.value)}
+              required
+            />
+            <Button primary type="submit" fluid style={{ marginTop: '1em' }}>
+              {loading ? 'Creating Interview...' : 'Create Interview'}
+            </Button>
+          </Form>
+          {successMsg && <Message positive style={{ marginTop: '1em' }}>{successMsg}</Message>}
+          {errorMsg && <Message negative style={{ marginTop: '1em' }}>Error: {errorMsg}</Message>}
+        </Container>
+      </Segment>
+    </>
   );
 }
