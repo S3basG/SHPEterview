@@ -51,8 +51,8 @@ export default function CreateInterview() {
           minHeight: '40vh',
           padding: '4em 0em',
           background:
-            'url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center center/cover no-repeat',
-          position: 'relative',
+            'url("/vro.jpg") center 30%/cover no-repeat',
+          position: 'center',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

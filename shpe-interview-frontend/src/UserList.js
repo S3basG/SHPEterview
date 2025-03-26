@@ -26,7 +26,7 @@ export default function UserList() {
           minHeight: '40vh',
           padding: '4em 0em',
           background:
-            'url("https://images.unsplash.com/photo-1498050108023-c5249f4df085") center center/cover no-repeat',
+            'url("/Hecorbotrj.jpg") center center/cover no-repeat',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',

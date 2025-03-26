@@ -1,68 +1,105 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
+import { Segment, Card, Header, Form, Button, Message } from 'semantic-ui-react';
 
-// Define the login mutation. Adjust the fields if necessary.
 const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password)
   }
 `;
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+  const { token, login } = useContext(AuthContext);
 
-  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+  // Redirect if already logged in
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
+
+  const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: (data) => {
-      // Store the token in localStorage so that Apollo Client can attach it automatically.
-      localStorage.setItem('token', data.login);
-      // Redirect to home or test page after successful login.
+      login(data.login);
       navigate('/');
     },
     onError: (error) => {
       setErrorMsg(error.message);
-    }
+    },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ variables: { email, password } });
+    loginMutation({ variables: { email, password } });
+  };
+
+
+  const pageStyle = {
+    height: '100vh',
+    
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundImage: 'url("/vro.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: '50% auto',
+    margin: 0,
+    padding: 0,
+  };
+  
+
+  const cardStyle = {
+    width: '400px',
+    maxWidth: '90%',
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+    borderRadius: '8px',
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label><br />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label><br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      {errorMsg && <p style={{ color: 'red' }}>Error: {errorMsg}</p>}
-    </div>
+    <Segment basic vertical style={pageStyle}>
+      <Card style={cardStyle}>
+        <Card.Content>
+          <Header as="h2" textAlign="center" style={{ marginBottom: '1em' }}>
+            Login to Your Account
+          </Header>
+          <Form onSubmit={handleSubmit} error={!!errorMsg}>
+            <Form.Input
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Form.Input
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <Button type="submit" primary fluid style={{ marginTop: '1em' }}>
+              {loading ? 'Logging in...' : 'Login'}
+            </Button>
+          </Form>
+          {errorMsg && (
+            <Message
+              error
+              header="Login Error"
+              content={errorMsg}
+              style={{ marginTop: '1em' }}
+            />
+          )}
+        </Card.Content>
+      </Card>
+    </Segment>
   );
-};
-
-
-
-export default Login;
+}
