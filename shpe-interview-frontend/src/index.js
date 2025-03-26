@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css';
-
-
+import { AuthProvider } from './AuthContext'; // Ensure this is correctly imported
 
 import {
   ApolloClient,
@@ -43,7 +42,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <AuthProvider> {/* Ensure AuthProvider wraps the App */}
+        <App />
+      </AuthProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

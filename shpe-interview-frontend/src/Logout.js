@@ -1,10 +1,12 @@
-// Logout.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'semantic-ui-react';
+import { AuthContext } from './AuthContext'; // Corrected path
+
 
 function LogoutButton() {
+  const { logout } = useContext(AuthContext);
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     window.location.href = '/login';
   };
 
